@@ -1,4 +1,17 @@
 console.log('app.js loaded!');
 
 // initialize the application
-var app = angular.module("hangmanApp", []);
+angular
+  .module("hangmanApp", [])
+  .controller("hangmanCtrl", hangmanCtrl)
+
+  hangmanCtrl.$inject=["$scope"];
+
+  function hangmanCtrl($scope) {
+    // var testVariable = "elephant";
+    $scope.game = new HangmanGame("elephant");
+    $scope.guessLetter = function(input){
+      $scope.game.guess(input);
+      $scope.game.input = "";
+    }
+  }
